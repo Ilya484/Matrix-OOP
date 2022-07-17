@@ -49,14 +49,14 @@ class Matrix:
 
     def __getitem__(self, key):
         x, y = key
-        return self.__matrix[x][y]
+        return self.__matrix[x - 1][y - 1]
 
     def __setitem__(self, key, value):
         if not isinstance(value, self.get_type()):
             raise TypeValuesException(
                             f"{value} have type of {type(value)}! ({type(value)} != {self.get_type()})")
         x, y = key
-        return self.__matrix[x][y]
+        self.__matrix[x - 1][y - 1] = value
 
     def __mul__(self, other):
         if not (t := self.__check_type(other))[0]:
