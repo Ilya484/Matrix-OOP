@@ -52,9 +52,9 @@ class Matrix:
         return self.__matrix[x - 1][y - 1]
 
     def __setitem__(self, key, value):
-        if not isinstance(value, self.get_type()):
+        if not isinstance(value, self.__type):
             raise TypeValuesException(
-                            f"{value} have type of {type(value)}! ({type(value)} != {self.get_type()})")
+                            f"{value} have type of {type(value)}! ({type(value)} != {self.__type})")
         x, y = key
         self.__matrix[x - 1][y - 1] = value
 
@@ -65,7 +65,7 @@ class Matrix:
         if t[1] in (int, float):
             new = [[0] * self.__columns for _ in range(self.__rows)]
             if t[1] == int:
-                type_ = self.get_type()
+                type_ = self.__type
             else:
                 type_ = float
 
@@ -76,6 +76,8 @@ class Matrix:
         else:
             type_ = float
 
+    def __repr__(self):
+        return f"Matrix: type of {self.get_type()}; size of {self.get_size()}"
 
 
     def __rmul__(self, other):
@@ -85,4 +87,4 @@ class Matrix:
         return f"{self.__rows}x{self.__columns}"
 
     def get_type(self):
-        return self.__type
+        return str(self.__type).split()[-1][1:-2]
